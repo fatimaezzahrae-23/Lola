@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Métadonnées essentielles et adaptation mobile -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Sanctuaire d'Étude 🦢🌷</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Playfair Display & Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icônes Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Configuration personnalisée de Tailwind CSS avec palette rose poudré, or rose et crème -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Quicksand"', 'sans-serif'],
+          },
+          colors: {
+            blush: {
+              50: '#FFF8FA',
+              100: '#FFEFF4',
+              200: '#FFD6E4',
+              300: '#FFB3CD',
+              400: '#FF85B0',
+              500: '#F45B93',
+              600: '#D93B75',
+              700: '#B5265B',
+            },
+            rosegold: {
+              300: '#E8B4B8',
+              400: '#D8969C',
+              500: '#C47A81',
+            },
+            cream: '#FFFDFD',
+          },
+          boxShadow: {
+            'soft': '0 10px 30px -5px rgba(244, 91, 147, 0.12)',
+            'glow': '0 0 22px rgba(255, 133, 176, 0.35)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Styles complémentaires subtils pour le défilement, la progression circulaire et la douceur visuelle -->
+  <style>
+    body {
+      background-color: #FFF8FA;
+      background-image:
+        radial-gradient(at 10% 10%, rgba(255, 214, 228, 0.45) 0px, transparent 50%),
+        radial-gradient(at 90% 15%, rgba(232, 180, 184, 0.28) 0px, transparent 50%),
+        radial-gradient(at 50% 95%, rgba(255, 239, 244, 0.7) 0px, transparent 55%);
+      min-height: 100vh;
+    }
+
+    /* Barre de défilement délicate */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FFF8FA;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #FFD6E4;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #F45B93;
+    }
+
+    /* Animation douce de flottement pour l'ambiance du sanctuaire */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+    .animate-gentle-float {
+      animation: gentleFloat 5s ease-in-out infinite;
+    }
+
+    /* Anneau de progression SVG */
+    .progress-ring-circle {
+      transition: stroke-dashoffset 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+  </style>
+</head>
+<body class="font-sans text-stone-700 antialiased selection:bg-blush-200 selection:text-blush-700 rounded-xl">
+
+  <!-- Conteneur principal centré et fluide -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- Bannière de notification discrète -->
+    <div id="toast-banner" class="hidden fixed bottom-5 right-5 z-50 max-w-sm bg-cream/95 backdrop-blur-md border border-blush-200 text-stone-700 px-4 py-3 rounded-2xl shadow-soft flex items-center gap-3 transition-all duration-300" role="status" aria-live="polite">
+      <span class="w-8 h-8 rounded-full bg-blush-100 text-blush-600 flex items-center justify-center shrink-0">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+      </span>
+      <p id="toast-message" class="text-sm font-medium leading-snug"></p>
+    </div>
+
+    <!-- En-tête du Sanctuaire d'Étude -->
+    <header class="bg-cream/90 backdrop-blur-md border border-blush-200/80 rounded-3xl shadow-soft p-5 sm:p-7 mb-6 sm:mb-8">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        <!-- Titre poétique et intention du jour -->
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blush-100 border border-blush-200 text-blush-700 text-xs font-semibold tracking-wide">
+            <span class="animate-gentle-float inline-block">🦢🌷</span>
+            <span>Espace calme &amp; concentration</span>
+          </div>
+          <h1 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-stone-800 tracking-tight">
+            Mon Sanctuaire d'Étude
+          </h1>
+          <p id="date-display" class="text-sm text-rosegold-500 font-medium capitalize"></p>
+        </div>
+
+        <!-- Statistiques rapides & intention du jour -->
+        <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+          <div class="bg-blush-50 border border-blush-200/70 rounded-2xl px-4 py-2.5 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-blush-100 text-blush-600 flex items-center justify-center">
+              <i data-lucide="flame" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-stone-400">Sessions finies</p>
+              <p id="completed-sessions-count" class="text-lg font-bold text-stone-800 leading-tight">0</p>
+            </div>
+          </div>
+
+          <div class="bg-blush-50 border border-blush-200/70 rounded-2xl px-4 py-2.5 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-blush-100 text-blush-600 flex items-center justify-center">
+              <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-stone-400">Objectifs faits</p>
+              <p id="tasks-progress-text" class="text-lg font-bold text-stone-800 leading-tight">0 / 0</p>
+            </div>
+          </div>
+
+          <div class="bg-blush-50 border border-blush-200/70 rounded-2xl px-4 py-2.5 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-blush-100 text-blush-600 flex items-center justify-center">
+              <i data-lucide="moon-star" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-stone-400">Prières validées</p>
+              <p id="prayers-progress-text" class="text-lg font-bold text-stone-800 leading-tight">0 / 5</p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            id="reset-day-btn"
+            class="p-3 rounded-2xl bg-cream hover:bg-blush-100 active:scale-[0.98] border border-blush-200 text-stone-600 hover:text-blush-700 transition-all duration-200 flex items-center gap-2 text-sm font-semibold shadow-sm"
+            title="Réinitialiser les compteurs de la journée"
+          >
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Nouvelle journée</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Intention / Objectif principal du jour -->
+      <div class="mt-5 pt-4 border-t border-blush-100 flex flex-col sm:flex-row sm:items-center gap-2.5">
+        <label for="daily-intention-input" class="text-xs font-bold uppercase tracking-wider text-rosegold-500 flex items-center gap-1.5 shrink-0">
+          <i data-lucide="heart" class="w-3.5 h-3.5 text-blush-500"></i>
+          <span>Intention douce du jour :</span>
+        </label>
+        <input
+          type="text"
+          id="daily-intention-input"
+          placeholder="Ex. : Relire le chapitre d'histoire avec sérénité..."
+          class="w-full bg-blush-50/70 focus:bg-cream border border-blush-200/80 focus:border-blush-400 rounded-xl px-3.5 py-2 text-sm text-stone-700 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-blush-200 transition-all"
+        />
+      </div>
+    </header>
+
+    <!-- Grille principale : Colonne gauche (Minuteur + Ambiance) & Colonne droite (Tâches + Notes de session) -->
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+
+      <!-- COLONNE GAUCHE (5 colonnes sur grand écran) -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- Carte Minuteur Pomodoro / Étude -->
+        <section aria-labelledby="timer-heading" class="bg-cream/95 backdrop-blur-md border border-blush-200/90 rounded-3xl shadow-soft p-6 sm:p-7">
+          <div class="flex items-center justify-between mb-5">
+            <div>
+              <h2 id="timer-heading" class="font-serif text-xl sm:text-2xl font-semibold text-stone-800">
+                Minuteur d'Étude
+              </h2>
+              <p id="mode-subtitle" class="text-xs font-medium text-rosegold-500 mt-0.5">
+                Temps de concentration profonde
+              </p>
+            </div>
+            <span id="timer-status-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-blush-100 text-blush-700 border border-blush-200">
+              En pause
+            </span>
+          </div>
+
+          <!-- Sélecteur de modes (Focus / Pause courte / Pause longue) -->
+          <div class="grid grid-cols-3 gap-1.5 bg-blush-50 p-1.5 rounded-2xl border border-blush-200/70 mb-6" role="tablist" aria-label="Modes du minuteur">
+            <button
+              type="button"
+              data-mode="focus"
+              class="mode-btn py-2 px-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-blush-500 text-white shadow-sm"
+            >
+              Focus
+            </button>
+            <button
+              type="button"
+              data-mode="shortBreak"
+              class="mode-btn py-2 px-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-stone-600 hover:bg-blush-100"
+            >
+              Pause douce
+            </button>
+            <button
+              type="button"
+              data-mode="longBreak"
+              class="mode-btn py-2 px-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-stone-600 hover:bg-blush-100"
+            >
+              Grande pause
+            </button>
+          </div>
+
+          <!-- Cadran circulaire SVG + Affichage numérique -->
+          <div class="relative flex items-center justify-center my-4">
+            <div class="w-56 h-56 sm:w-60 sm:h-60 rounded-full bg-blush-50/80 border border-blush-200/70 flex items-center justify-center shadow-inner relative">
+              <svg class="w-full h-full" viewBox="0 0 220 220" aria-hidden="true">
+                <!-- Cercle de fond -->
+                <circle
+                  cx="110"
+                  cy="110"
+                  r="96"
+                  fill="none"
+                  stroke="#FFEFF4"
+                  stroke-width="10"
+                />
+                <!-- Cercle de progression rose -->
+                <circle
+                  id="progress-circle"
+                  class="progress-ring-circle"
+                  cx="110"
+                  cy="110"
+                  r="96"
+                  fill="none"
+                  stroke="#F45B93"
+                  stroke-width="10"
+                  stroke-linecap="round"
+                  stroke-dasharray="603.185"
+                  stroke-dashoffset="0"
+                />
+              </svg>
+
+              <!-- Temps restant -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                <span id="timer-display" class="font-serif text-4xl sm:text-5xl font-bold text-stone-800 tracking-tight tabular-nums">
+                  25:00
+                </span>
+                <span id="current-task-label" class="mt-1.5 text-xs font-medium text-rosegold-500 line-clamp-1 max-w-[160px]">
+                  Prêt à commencer
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contrôles principaux du minuteur -->
+          <div class="flex items-center justify-center gap-3 mt-6">
+            <button
+              type="button"
+              id="start-pause-btn"
+              class="flex-1 max-w-[200px] py-3 px-5 rounded-2xl bg-blush-500 hover:bg-blush-600 active:scale-[0.98] text-white font-bold text-sm sm:text-base shadow-glow transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <i id="start-pause-icon" data-lucide="play" class="w-4 h-4 fill-current"></i>
+              <span id="start-pause-text">Commencer</span>
+            </button>
+
+            <button
+              type="button"
+              id="reset-timer-btn"
+              class="p-3 rounded-2xl bg-blush-50 hover:bg-blush-100 active:scale-[0.98] border border-blush-200 text-stone-600 hover:text-blush-700 transition-all duration-200"
+              title="Réinitialiser le minuteur"
+              aria-label="Réinitialiser le minuteur"
+            >
+              <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+            </button>
+
+            <button
+              type="button"
+              id="skip-session-btn"
+              class="p-3 rounded-2xl bg-blush-50 hover:bg-blush-100 active:scale-[0.98] border border-blush-200 text-stone-600 hover:text-blush-700 transition-all duration-200"
+              title="Passer à la session suivante"
+              aria-label="Passer à la session suivante"
+            >
+              <i data-lucide="skip-forward" class="w-5 h-5"></i>
+            </button>
+          </div>
+
+          <!-- Réglage rapide des durées (en minutes) -->
+          <div class="mt-6 pt-5 border-t border-blush-100">
+            <p class="text-xs font-bold uppercase tracking-wider text-stone-400 mb-3 flex items-center gap-1.5">
+              <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5 text-rosegold-400"></i>
+              <span>Durées personnalisées (minutes)</span>
+            </p>
+            <div class="grid grid-cols-3 gap-2.5">
+              <div>
+                <label for="focus-minutes-input" class="block text-[11px] font-semibold text-stone-500 mb-1">Focus</label>
+                <input
+                  type="number"
+                  id="focus-minutes-input"
+                  min="1"
+                  max="120"
+                  value="25"
+                  class="w-full bg-blush-50 border border-blush-200 rounded-xl px-2.5 py-1.5 text-sm font-semibold text-stone-700 focus:outline-none focus:border-blush-400"
+                />
+              </div>
+              <div>
+                <label for="short-break-input" class="block text-[11px] font-semibold text-stone-500 mb-1">Pause courte</label>
+                <input
+                  type="number"
+                  id="short-break-input"
+                  min="1"
+                  max="60"
+                  value="5"
+                  class="w-full bg-blush-50 border border-blush-200 rounded-xl px-2.5 py-1.5 text-sm font-semibold text-stone-700 focus:outline-none focus:border-blush-400"
+                />
+              </div>
+              <div>
+                <label for="long-break-input" class="block text-[11px] font-semibold text-stone-500 mb-1">Grande pause</label>
+                <input
+                  type="number"
+                  id="long-break-input"
+                  min="1"
+                  max="90"
+                  value="15"
+                  class="w-full bg-blush-50 border border-blush-200 rounded-xl px-2.5 py-1.5 text-sm font-semibold text-stone-700 focus:outline-none focus:border-blush-400"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Carte Ambiance Sonore & Focus (synthèse Web Audio douce sans fichiers externes) -->
+        <section aria-labelledby="ambient-heading" class="bg-cream/95 backdrop-blur-md border border-blush-200/90 rounded-3xl shadow-soft p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h2 id="ambient-heading" class="font-serif text-xl font-semibold text-stone-800">
+                Ambiance &amp; Sérénité
+              </h2>
+              <p class="text-xs text-rosegold-500 font-medium">
+                Sons doux générés sur mesure pour l'étude
+              </p>
+            </div>
+            <span class="w-9 h-9 rounded-2xl bg-blush-100 text-blush-600 flex items-center justify-center">
+              <i data-lucide="headphones" class="w-4 h-4"></i>
+            </span>
+          </div>
+
+          <!-- Choix de l'ambiance sonore -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+            <button
+              type="button"
+              data-sound="none"
+              class="sound-btn p-2.5 rounded-2xl border border-blush-200 bg-blush-500 text-white text-xs font-semibold flex flex-col items-center gap-1.5 transition-all"
+            >
+              <i data-lucide="volume-x" class="w-4 h-4"></i>
+              <span>Silence</span>
+            </button>
+            <button
+              type="button"
+              data-sound="rain"
+              class="sound-btn p-2.5 rounded-2xl border border-blush-200 bg-blush-50 hover:bg-blush-100 text-stone-700 text-xs font-semibold flex flex-col items-center gap-1.5 transition-all"
+            >
+              <i data-lucide="cloud-rain" class="w-4 h-4 text-blush-500"></i>
+              <span>Pluie douce</span>
+            </button>
+            <button
+              type="button"
+              data-sound="breeze"
+              class="sound-btn p-2.5 rounded-2xl border border-blush-200 bg-blush-50 hover:bg-blush-100 text-stone-700 text-xs font-semibold flex flex-col items-center gap-1.5 transition-all"
+            >
+              <i data-lucide="wind" class="w-4 h-4 text-blush-500"></i>
+              <span>Brise</span>
+            </button>
+            <button
+              type="button"
+              data-sound="chimes"
+              class="sound-btn p-2.5 rounded-2xl border border-blush-200 bg-blush-50 hover:bg-blush-100 text-stone-700 text-xs font-semibold flex flex-col items-center gap-1.5 transition-all"
+            >
+              <i data-lucide="sparkles" class="w-4 h-4 text-blush-500"></i>
+              <span>Carillons</span>
+            </button>
+          </div>
+
+          <!-- Contrôle du volume & carillon de fin -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <i data-lucide="volume-1" class="w-4 h-4 text-stone-400 shrink-0"></i>
+              <input
+                type="range"
+                id="volume-slider"
+                min="0"
+                max="100"
+                value="35"
+                aria-label="Volume de l'ambiance sonore"
+                class="w-full accent-blush-500 cursor-pointer"
+              />
+              <span id="volume-value" class="text-xs font-bold text-stone-500 w-9 text-right tabular-nums">35%</span>
+            </div>
+
+            <label class="flex items-center justify-between pt-2 border-t border-blush-100 cursor-pointer select-none">
+              <span class="text-xs font-semibold text-stone-600 flex items-center gap-2">
+                <i data-lucide="bell-ring" class="w-4 h-4 text-blush-500"></i>
+                <span>Carillon doux en fin de session</span>
+              </span>
+              <input
+                type="checkbox"
+                id="chime-enabled-toggle"
+                checked
+                class="w-4 h-4 rounded accent-blush-500 cursor-pointer"
+              />
+            </label>
+          </div>
+        </section>
+
+        <!-- Carte Prières Quotidiennes (validation des 5 prières avec horodatage & note) -->
+        <section aria-labelledby="prayers-heading" class="bg-cream/95 backdrop-blur-md border border-blush-200/90 rounded-3xl shadow-soft p-6">
+          <div class="flex items-center justify-between gap-2 mb-4">
+            <div>
+              <h2 id="prayers-heading" class="font-serif text-xl font-semibold text-stone-800">
+                Prières Quotidiennes
+              </h2>
+              <p class="text-xs text-rosegold-500 font-medium">
+                Validez chacune de vos 5 prières de la journée
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="prayers-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-blush-100 text-blush-700 border border-blush-200 tabular-nums">
+                0 / 5
+              </span>
+              <button
+                type="button"
+                id="reset-prayers-btn"
+                title="Réinitialiser les prières"
+                aria-label="Réinitialiser les prières"
+                class="p-2 rounded-xl bg-blush-50 hover:bg-blush-100 border border-blush-200 text-stone-600 hover:text-blush-700 transition-all"
+              >
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <ul id="prayers-list" class="space-y-2.5">
+            <!-- Rempli dynamiquement en JavaScript -->
+          </ul>
+        </section>
+      </div>
+
+      <!-- COLONNE DROITE (7 colonnes sur grand écran) -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- Carte Liste de Tâches d'Étude -->
+        <section aria-labelledby="tasks-heading" class="bg-cream/95 backdrop-blur-md border border-blush-200/90 rounded-3xl shadow-soft p-6 sm:p-7">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-5">
+            <div>
+              <h2 id="tasks-heading" class="font-serif text-xl sm:text-2xl font-semibold text-stone-800">
+                Carnet d'Objectifs
+              </h2>
+              <p class="text-xs text-rosegold-500 font-medium">
+                Sélectionnez une tâche pour l'associer à votre session en cours
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                id="add-quran-task-btn"
+                class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-blush-100 hover:bg-blush-200/80 text-blush-700 border border-blush-200 transition-all flex items-center gap-1.5"
+              >
+                <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                <span>Lire un verset du Coran</span>
+              </button>
+              <button
+                type="button"
+                id="clear-completed-btn"
+                class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-blush-50 hover:bg-blush-100 text-stone-600 hover:text-blush-700 border border-blush-200 transition-all"
+              >
+                Nettoyer terminées
+              </button>
+            </div>
+          </div>
+
+          <!-- Suggestion douce de verset du Coran à lire -->
+          <div class="mb-5 p-3.5 rounded-2xl bg-blush-50/80 border border-blush-200/80 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-rosegold-500">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blush-500 shrink-0"></i>
+                <span id="quran-verse-ref">Sourate Al-Baqarah (2:286)</span>
+              </div>
+              <p id="quran-verse-text" class="text-xs sm:text-sm font-medium text-stone-700 mt-1">
+                « Allah n’impose à aucune âme une charge supérieure à sa capacité. »
+              </p>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                id="next-quran-verse-btn"
+                title="Autre verset"
+                aria-label="Autre verset"
+                class="p-2 rounded-xl bg-cream hover:bg-blush-100 border border-blush-200 text-stone-600 hover:text-blush-700 transition-all"
+              >
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              </button>
+              <button
+                type="button"
+                id="use-quran-verse-btn"
+                class="px-3 py-1.5 rounded-xl bg-blush-500 hover:bg-blush-600 text-white text-xs font-semibold transition-all shadow-sm"
+              >
+                Ajouter ce verset
+              </button>
+            </div>
+          </div>
+
+          <!-- Formulaire d'ajout de tâche -->
+          <form id="add-task-form" class="flex flex-col sm:flex-row gap-2.5 mb-5">
+            <input
+              type="text"
+              id="task-title-input"
+              placeholder="Ajouter une matière, fiche ou chapitre à réviser..."
+              required
+              class="flex-1 bg-blush-50/70 focus:bg-cream border border-blush-200 focus:border-blush-400 rounded-2xl px-4 py-2.5 text-sm text-stone-700 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-blush-200 transition-all"
+            />
+            <div class="flex gap-2">
+              <input
+                type="number"
+                id="task-est-input"
+                min="1"
+                max="12"
+                value="1"
+                title="Nombre de sessions estimées"
+                aria-label="Nombre de sessions estimées"
+                class="w-20 bg-blush-50/70 focus:bg-cream border border-blush-200 focus:border-blush-400 rounded-2xl px-3 py-2.5 text-sm font-semibold text-stone-700 text-center focus:outline-none focus:ring-2 focus:ring-blush-200"
+              />
+              <button
+                type="submit"
+                class="px-5 py-2.5 rounded-2xl bg-blush-500 hover:bg-blush-600 active:scale-[0.98] text-white font-bold text-sm shadow-sm hover:shadow-glow transition-all flex items-center justify-center gap-1.5 shrink-0"
+              >
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                <span>Ajouter</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Liste des tâches -->
+          <ul id="task-list" class="space-y-2.5 max-h-[340px] overflow-y-auto pr-1">
+            <!-- Rempli dynamiquement en JavaScript -->
+          </ul>
+
+          <!-- État vide si aucune tâche -->
+          <div id="empty-tasks-state" class="hidden text-center py-8 px-4 rounded-2xl bg-blush-50/60 border border-dashed border-blush-200">
+            <p class="text-2xl mb-2">🌷</p>
+            <p class="font-serif text-base font-semibold text-stone-700">Votre carnet est tout doux et prêt</p>
+            <p class="text-xs text-stone-500 mt-1">Ajoutez votre premier objectif d'étude ci-dessus pour avancer pas à pas.</p>
+          </div>
+        </section>
+
+        <!-- Carte Notes de Session & Synthèse -->
+        <section aria-labelledby="notes-heading" class="bg-cream/95 backdrop-blur-md border border-blush-200/90 rounded-3xl shadow-soft p-6 sm:p-7">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+            <div>
+              <h2 id="notes-heading" class="font-serif text-xl sm:text-2xl font-semibold text-stone-800">
+                Notes de Session
+              </h2>
+              <p class="text-xs text-rosegold-500 font-medium">
+                Idées clés, définitions importantes et questions à approfondir
+              </p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="notes-save-status" class="text-xs font-semibold text-rosegold-500 bg-blush-50 px-3 py-1 rounded-full border border-blush-200/70">
+                Enregistré automatiquement
+              </span>
+              <button
+                type="button"
+                id="copy-notes-btn"
+                class="p-2 rounded-xl bg-blush-50 hover:bg-blush-100 border border-blush-200 text-stone-600 hover:text-blush-700 transition-all"
+                title="Copier les notes"
+                aria-label="Copier les notes"
+              >
+                <i data-lucide="copy" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <textarea
+            id="session-notes-textarea"
+            rows="8"
+            placeholder="Écrivez ici vos résumés, formules, citations ou points à revoir après votre prochaine pause..."
+            class="w-full bg-blush-50/50 focus:bg-cream border border-blush-200 focus:border-blush-400 rounded-2xl p-4 text-sm text-stone-700 leading-relaxed placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-blush-200 transition-all resize-y"
+          ></textarea>
+
+          <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-400">
+            <span id="notes-word-count">0 mot · 0 caractère</span>
+            <span>Sauvegarde locale instantanée</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Pied de page discret -->
+    <footer class="mt-8 text-center text-xs text-rosegold-500 font-medium py-3">
+      Prenez soin de votre esprit · Mon Sanctuaire d'Étude 🦢🌷
+    </footer>
+  </div>
+
+  <!-- Logique complète de l'application (Minuteur, Tâches, Notes, Ambiance Audio & localStorage) -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Clé unique de stockage local pour persister l'état du sanctuaire
+      const STORAGE_KEY = 'mon_sanctuaire_etude_v1';
+
+      // Constantes géométriques pour l'anneau SVG (rayon = 96 -> circonférence = 2 * pi * 96)
+      const CIRCLE_RADIUS = 96;
+      const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * CIRCLE_RADIUS;
+
+      // Liste des 5 prières quotidiennes
+      const PRAYER_DEFINITIONS = [
+        { id: 'fajr', name: 'Fajr', hint: 'Aube' },
+        { id: 'dhuhr', name: 'Dhuhr', hint: 'Midi' },
+        { id: 'asr', name: 'Asr', hint: 'Après-midi' },
+        { id: 'maghrib', name: 'Maghrib', hint: 'Crépuscule' },
+        { id: 'isha', name: 'Isha', hint: 'Nuit' },
+      ];
+
+      // Sélection de versets inspirants pour la lecture quotidienne
+      const QURAN_VERSES = [
+        {
+          ref: 'Sourate Al-Baqarah (2:286)',
+          text: '« Allah n’impose à aucune âme une charge supérieure à sa capacité. »',
+        },
+        {
+          ref: 'Sourate Ash-Sharh (94:5–6)',
+          text: '« À côté de la difficulté est certes une facilité ! À côté de la difficulté est certes une facilité. »',
+        },
+        {
+          ref: 'Sourate Taha (20:114)',
+          text: '« Ô mon Seigneur, accroît mes connaissances ! »',
+        },
+        {
+          ref: 'Sourate Al-‘Alaq (96:1)',
+          text: '« Lis, au nom de ton Seigneur qui a créé. »',
+        },
+      ];
+
+      /**
+       * Retourne l'état initial des 5 prières quotidiennes.
+       */
+      function createDefaultPrayers() {
+        return PRAYER_DEFINITIONS.reduce((acc, p) => {
+          acc[p.id] = {
+            validated: false,
+            validatedAt: '',
+            note: '',
+          };
+          return acc;
+        }, {});
+      }
+
+      /**
+       * Retourne l'heure locale actuelle au format HH:MM.
+       */
+      function getCurrentTimeLabel() {
+        const now = new Date();
+        return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      }
+
+      /**
+       * Retourne la clé de date locale du jour au format YYYY-MM-DD.
+       */
+      function getTodayKey() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      /**
+       * Formate la date actuelle en français de manière lisible.
+       */
+      function formatFrenchDate() {
+        try {
+          return new Intl.DateTimeFormat('fr-FR', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          }).format(new Date());
+        } catch (_) {
+          return getTodayKey();
+        }
+      }
+
+      // État par défaut de l'application
+      const DEFAULT_STATE = {
+        dateKey: getTodayKey(),
+        intention: '',
+        mode: 'focus', // 'focus' | 'shortBreak' | 'longBreak'
+        durations: {
+          focus: 25,
+          shortBreak: 5,
+          longBreak: 15,
+        },
+        remainingSeconds: 25 * 60,
+        isRunning: false,
+        completedSessions: 0,
+        activeTaskId: null,
+        tasks: [
+          {
+            id: 'task-quran-daily',
+            title: 'Lire un verset du Coran',
+            estimated: 1,
+            completedCount: 0,
+            done: false,
+          },
+          {
+            id: 'task-init-1',
+            title: 'Relire les fiches de synthèse du chapitre',
+            estimated: 2,
+            completedCount: 0,
+            done: false,
+          },
+          {
+            id: 'task-init-2',
+            title: 'Faire 5 exercices d’application calmement',
+            estimated: 1,
+            completedCount: 0,
+            done: false,
+          },
+        ],
+        prayers: createDefaultPrayers(),
+        quranVerseIndex: 0,
+        notes: '',
+        sound: 'none', // 'none' | 'rain' | 'breeze' | 'chimes'
+        volume: 35,
+        chimeEnabled: true,
+      };
+
+      // Références DOM
+      const els = {
+        dateDisplay: document.getElementById('date-display'),
+        completedSessionsCount: document.getElementById('completed-sessions-count'),
+        tasksProgressText: document.getElementById('tasks-progress-text'),
+        prayersProgressText: document.getElementById('prayers-progress-text'),
+        prayersBadge: document.getElementById('prayers-badge'),
+        prayersList: document.getElementById('prayers-list'),
+        resetPrayersBtn: document.getElementById('reset-prayers-btn'),
+        resetDayBtn: document.getElementById('reset-day-btn'),
+        dailyIntentionInput: document.getElementById('daily-intention-input'),
+        modeBtns: Array.from(document.querySelectorAll('.mode-btn')),
+        modeSubtitle: document.getElementById('mode-subtitle'),
+        timerStatusBadge: document.getElementById('timer-status-badge'),
+        progressCircle: document.getElementById('progress-circle'),
+        timerDisplay: document.getElementById('timer-display'),
+        currentTaskLabel: document.getElementById('current-task-label'),
+        startPauseBtn: document.getElementById('start-pause-btn'),
+        startPauseIcon: document.getElementById('start-pause-icon'),
+        startPauseText: document.getElementById('start-pause-text'),
+        resetTimerBtn: document.getElementById('reset-timer-btn'),
+        skipSessionBtn: document.getElementById('skip-session-btn'),
+        focusMinutesInput: document.getElementById('focus-minutes-input'),
+        shortBreakInput: document.getElementById('short-break-input'),
+        longBreakInput: document.getElementById('long-break-input'),
+        soundBtns: Array.from(document.querySelectorAll('.sound-btn')),
+        volumeSlider: document.getElementById('volume-slider'),
+        volumeValue: document.getElementById('volume-value'),
+        chimeEnabledToggle: document.getElementById('chime-enabled-toggle'),
+        addTaskForm: document.getElementById('add-task-form'),
+        taskTitleInput: document.getElementById('task-title-input'),
+        taskEstInput: document.getElementById('task-est-input'),
+        taskList: document.getElementById('task-list'),
+        emptyTasksState: document.getElementById('empty-tasks-state'),
+        addQuranTaskBtn: document.getElementById('add-quran-task-btn'),
+        quranVerseRef: document.getElementById('quran-verse-ref'),
+        quranVerseText: document.getElementById('quran-verse-text'),
+        nextQuranVerseBtn: document.getElementById('next-quran-verse-btn'),
+        useQuranVerseBtn: document.getElementById('use-quran-verse-btn'),
+        clearCompletedBtn: document.getElementById('clear-completed-btn'),
+        notesTextarea: document.getElementById('session-notes-textarea'),
+        notesSaveStatus: document.getElementById('notes-save-status'),
+        notesWordCount: document.getElementById('notes-word-count'),
+        copyNotesBtn: document.getElementById('copy-notes-btn'),
+        toastBanner: document.getElementById('toast-banner'),
+        toastMessage: document.getElementById('toast-message'),
+      };
+
+      // Initialisation de la circonférence de l'anneau SVG
+      els.progressCircle.style.strokeDasharray = `${CIRCLE_CIRCUMFERENCE}`;
+
+      let state = loadState();
+      let timerInterval = null;
+      let toastTimeout = null;
+
+      // Variables Web Audio pour sons d'ambiance doux et carillon de fin
+      let audioCtx = null;
+      let masterGain = null;
+      let ambientNodes = [];
+      let chimeInterval = null;
+
+      /**
+       * Affiche une notification discrète et temporaire.
+       */
+      function showToast(message) {
+        els.toastMessage.textContent = message;
+        els.toastBanner.classList.remove('hidden');
+
+        if (toastTimeout) {
+          clearTimeout(toastTimeout);
+        }
+        toastTimeout = setTimeout(() => {
+          els.toastBanner.classList.add('hidden');
+        }, 3200);
+      }
+
+      /**
+       * Charge l'état sauvegardé depuis localStorage de manière sécurisée.
+       */
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return { ...DEFAULT_STATE, prayers: createDefaultPrayers() };
+          const parsed = JSON.parse(raw);
+
+          const mergedDurations = {
+            focus: Math.max(1, Math.min(120, parseInt(parsed?.durations?.focus, 10) || DEFAULT_STATE.durations.focus)),
+            shortBreak: Math.max(1, Math.min(60, parseInt(parsed?.durations?.shortBreak, 10) || DEFAULT_STATE.durations.shortBreak)),
+            longBreak: Math.max(1, Math.min(90, parseInt(parsed?.durations?.longBreak, 10) || DEFAULT_STATE.durations.longBreak)),
+          };
+
+          const validMode = ['focus', 'shortBreak', 'longBreak'].includes(parsed?.mode)
+            ? parsed.mode
+            : 'focus';
+
+          const maxSec = mergedDurations[validMode] * 60;
+          const savedRemaining = typeof parsed?.remainingSeconds === 'number' && Number.isFinite(parsed.remainingSeconds)
+            ? Math.max(0, Math.min(maxSec, Math.floor(parsed.remainingSeconds)))
+            : maxSec;
+
+          const todayKey = getTodayKey();
+          const savedDateKey = parsed?.dateKey || todayKey;
+          const isNewDay = savedDateKey !== todayKey;
+
+          // Réinitialisation automatique quotidienne des validations de prières si le jour a changé
+          const basePrayers = createDefaultPrayers();
+          const mergedPrayers = PRAYER_DEFINITIONS.reduce((acc, p) => {
+            const incoming = parsed?.prayers?.[p.id];
+            acc[p.id] = {
+              validated: isNewDay ? false : Boolean(incoming?.validated),
+              validatedAt: isNewDay ? '' : String(incoming?.validatedAt || ''),
+              note: String(incoming?.note || ''),
+            };
+            return acc;
+          }, basePrayers);
+
+          const verseIdx = typeof parsed?.quranVerseIndex === 'number' && Number.isFinite(parsed.quranVerseIndex)
+            ? Math.abs(Math.floor(parsed.quranVerseIndex)) % QURAN_VERSES.length
+            : 0;
+
+          return {
+            ...DEFAULT_STATE,
+            ...parsed,
+            dateKey: todayKey,
+            intention: isNewDay ? '' : String(parsed?.intention || ''),
+            completedSessions: isNewDay ? 0 : Math.max(0, parseInt(parsed?.completedSessions, 10) || 0),
+            mode: validMode,
+            durations: mergedDurations,
+            remainingSeconds: savedRemaining > 0 ? savedRemaining : maxSec,
+            isRunning: false,
+            tasks: Array.isArray(parsed?.tasks) ? parsed.tasks : DEFAULT_STATE.tasks,
+            prayers: mergedPrayers,
+            quranVerseIndex: verseIdx,
+            volume: typeof parsed?.volume === 'number' ? Math.max(0, Math.min(100, parsed.volume)) : DEFAULT_STATE.volume,
+            chimeEnabled: typeof parsed?.chimeEnabled === 'boolean' ? parsed.chimeEnabled : DEFAULT_STATE.chimeEnabled,
+          };
+        } catch (err) {
+          console.warn('Erreur de lecture du stockage local :', err);
+          return { ...DEFAULT_STATE, prayers: createDefaultPrayers() };
+        }
+      }
+
+      /**
+       * Sauvegarde l'état courant dans localStorage de manière sécurisée.
+       */
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (err) {
+          console.warn('Impossible de sauvegarder localement :', err);
+        }
+      }
+
+      /**
+       * Formate un nombre de secondes en MM:SS.
+       */
+      function formatSeconds(totalSeconds) {
+        const safeSec = Math.max(0, Math.floor(totalSeconds));
+        const mins = Math.floor(safeSec / 60);
+        const secs = safeSec % 60;
+        return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      }
+
+      /**
+       * Met à jour l'affichage du minuteur, de l'anneau de progression et du titre de l'onglet.
+       */
+      function renderTimer() {
+        const totalDuration = Math.max(1, (state.durations[state.mode] || 25) * 60);
+        const remaining = Math.max(0, state.remainingSeconds);
+        const progressRatio = Math.min(1, Math.max(0, (totalDuration - remaining) / totalDuration));
+        const dashOffset = CIRCLE_CIRCUMFERENCE * (1 - progressRatio);
+
+        els.progressCircle.style.strokeDashoffset = `${dashOffset}`;
+        els.timerDisplay.textContent = formatSeconds(remaining);
+
+        // Titre de la page pendant qu'un minuteur tourne
+        if (state.isRunning) {
+          document.title = `${formatSeconds(remaining)} · Mon Sanctuaire d'Étude 🦢🌷`;
+        } else {
+          document.title = "Mon Sanctuaire d'Étude 🦢🌷";
+        }
+
+        // Sous-titre et style selon le mode
+        if (state.mode === 'focus') {
+          els.modeSubtitle.textContent = 'Temps de concentration profonde';
+          els.progressCircle.setAttribute('stroke', '#F45B93');
+        } else if (state.mode === 'shortBreak') {
+          els.modeSubtitle.textContent = 'Pause douce pour respirer et s’étirer';
+          els.progressCircle.setAttribute('stroke', '#D8969C');
+        } else {
+          els.modeSubtitle.textContent = 'Grande pause réparatrice';
+          els.progressCircle.setAttribute('stroke', '#C47A81');
+        }
+
+        // Tâche active associée
+        const activeTask = state.tasks.find((t) => t.id === state.activeTaskId && !t.done);
+        if (activeTask) {
+          els.currentTaskLabel.textContent = activeTask.title;
+        } else if (state.mode === 'focus') {
+          els.currentTaskLabel.textContent = state.isRunning ? 'Session en cours' : 'Prêt à commencer';
+        } else {
+          els.currentTaskLabel.textContent = 'Moment de détente';
+        }
+
+        // Bouton Démarrer / Pause
+        if (state.isRunning) {
+          els.startPauseText.textContent = 'Pause';
+          els.startPauseIcon.setAttribute('data-lucide', 'pause');
+          els.timerStatusBadge.textContent = 'En cours';
+          els.timerStatusBadge.className =
+            'px-3 py-1 rounded-full text-xs font-semibold bg-blush-500 text-white shadow-sm';
+        } else {
+          els.startPauseText.textContent = 'Commencer';
+          els.startPauseIcon.setAttribute('data-lucide', 'play');
+          els.timerStatusBadge.textContent = 'En pause';
+          els.timerStatusBadge.className =
+            'px-3 py-1 rounded-full text-xs font-semibold bg-blush-100 text-blush-700 border border-blush-200';
+        }
+
+        // Mise à jour des boutons d'onglet de mode
+        els.modeBtns.forEach((btn) => {
+          const isCurrent = btn.dataset.mode === state.mode;
+          btn.className = isCurrent
+            ? 'mode-btn py-2 px-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 bg-blush-500 text-white shadow-sm'
+            : 'mode-btn py-2 px-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-stone-600 hover:bg-blush-100';
+        });
+
+        lucide.createIcons();
+      }
+
+      /**
+       * Change le mode du minuteur ('focus', 'shortBreak', 'longBreak').
+       */
+      function setMode(newMode, autoStart = false) {
+        if (!['focus', 'shortBreak', 'longBreak'].includes(newMode)) return;
+        stopInterval();
+        state.mode = newMode;
+        state.remainingSeconds = (state.durations[newMode] || 25) * 60;
+        state.isRunning = Boolean(autoStart);
+        saveState();
+        renderTimer();
+        if (state.isRunning) {
+          startInterval();
+        }
+      }
+
+      /**
+       * Arrête l'intervalle du minuteur.
+       */
+      function stopInterval() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      /**
+       * Démarre l'intervalle d'une seconde du minuteur.
+       */
+      function startInterval() {
+        stopInterval();
+        timerInterval = setInterval(() => {
+          if (!state.isRunning) {
+            stopInterval();
+            return;
+          }
+
+          if (state.remainingSeconds > 1) {
+            state.remainingSeconds -= 1;
+            renderTimer();
+            if (state.remainingSeconds % 10 === 0) {
+              saveState();
+            }
+          } else {
+            state.remainingSeconds = 0;
+            handleTimerComplete(false);
+          }
+        }, 1000);
+      }
+
+      /**
+       * Gère la fin naturelle ou anticipée d'une session.
+       */
+      function handleTimerComplete(skipped = false) {
+        stopInterval();
+        state.isRunning = false;
+
+        if (state.mode === 'focus') {
+          if (!skipped) {
+            state.completedSessions += 1;
+
+            // Incrémenter la session complétée sur la tâche active si présente
+            const activeTask = state.tasks.find((t) => t.id === state.activeTaskId && !t.done);
+            if (activeTask) {
+              activeTask.completedCount = (activeTask.completedCount || 0) + 1;
+            }
+
+            if (state.chimeEnabled) {
+              playGentleChime();
+            }
+            showToast('Bravo ! Session de concentration terminée. Prenez une douce pause 🌷');
+          } else {
+            showToast('Session passée. On passe à la pause suivante.');
+          }
+
+          // Alterner vers grande pause toutes les 4 sessions, sinon pause courte
+          const nextBreak = state.completedSessions > 0 && state.completedSessions % 4 === 0
+            ? 'longBreak'
+            : 'shortBreak';
+          state.mode = nextBreak;
+          state.remainingSeconds = (state.durations[nextBreak] || 5) * 60;
+        } else {
+          if (!skipped && state.chimeEnabled) {
+            playGentleChime();
+          }
+          showToast(skipped ? 'Pause raccourcie. Retour au focus !' : 'La pause est douce et finie. Prêt pour une nouvelle session ? 🦢');
+          state.mode = 'focus';
+          state.remainingSeconds = (state.durations.focus || 25) * 60;
+        }
+
+        saveState();
+        renderStats();
+        renderTasks();
+        renderTimer();
+      }
+
+      /**
+       * Met à jour les statistiques affichées dans l'en-tête.
+       */
+      function renderStats() {
+        els.completedSessionsCount.textContent = String(state.completedSessions);
+        const totalTasks = state.tasks.length;
+        const doneTasks = state.tasks.filter((t) => t.done).length;
+        els.tasksProgressText.textContent = `${doneTasks} / ${totalTasks}`;
+
+        const validatedCount = PRAYER_DEFINITIONS.filter((p) => Boolean(state.prayers?.[p.id]?.validated)).length;
+        const prayerSummary = `${validatedCount} / ${PRAYER_DEFINITIONS.length}`;
+        if (els.prayersProgressText) {
+          els.prayersProgressText.textContent = prayerSummary;
+        }
+        if (els.prayersBadge) {
+          els.prayersBadge.textContent = prayerSummary;
+        }
+      }
+
+      /**
+       * Bascule la validation d'une prière quotidienne et enregistre l'heure si validée.
+       */
+      function togglePrayerValidation(prayerId) {
+        if (!state.prayers[prayerId]) {
+          state.prayers[prayerId] = { validated: false, validatedAt: '', note: '' };
+        }
+        const current = state.prayers[prayerId];
+        const nextValidated = !current.validated;
+        state.prayers[prayerId] = {
+          ...current,
+          validated: nextValidated,
+          validatedAt: nextValidated ? getCurrentTimeLabel() : '',
+        };
+        saveState();
+        renderPrayers();
+        renderStats();
+
+        const def = PRAYER_DEFINITIONS.find((p) => p.id === prayerId);
+        if (def) {
+          showToast(
+            nextValidated
+              ? `Prière ${def.name} validée (${state.prayers[prayerId].validatedAt}) 🌷`
+              : `Validation de ${def.name} retirée.`
+          );
+        }
+      }
+
+      /**
+       * Réinitialise les validations de prières de la journée.
+       */
+      function resetPrayers() {
+        PRAYER_DEFINITIONS.forEach((p) => {
+          const prevNote = state.prayers[p.id]?.note || '';
+          state.prayers[p.id] = {
+            validated: false,
+            validatedAt: '',
+            note: prevNote,
+          };
+        });
+        saveState();
+        renderPrayers();
+        renderStats();
+        showToast('Prières quotidiennes réinitialisées.');
+      }
+
+      /**
+       * Rend la liste des 5 prières quotidiennes avec validation, heure et note optionnelle.
+       */
+      function renderPrayers() {
+        if (!els.prayersList) return;
+        els.prayersList.innerHTML = '';
+
+        PRAYER_DEFINITIONS.forEach((prayer) => {
+          const itemState = state.prayers[prayer.id] || { validated: false, validatedAt: '', note: '' };
+          const isChecked = Boolean(itemState.validated);
+
+          const li = document.createElement('li');
+          li.className = `p-3 rounded-2xl border transition-all duration-200 ${
+            isChecked
+              ? 'bg-blush-100/85 border-blush-300'
+              : 'bg-blush-50/65 hover:bg-blush-100/50 border-blush-200/80'
+          }`;
+
+          const topRow = document.createElement('div');
+          topRow.className = 'flex items-center justify-between gap-2.5';
+
+          const toggleBtn = document.createElement('button');
+          toggleBtn.type = 'button';
+          toggleBtn.className = 'flex items-center gap-3 text-left flex-1 min-w-0';
+          toggleBtn.setAttribute('aria-pressed', String(isChecked));
+
+          const box = document.createElement('span');
+          box.className = `w-5 h-5 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
+            isChecked
+              ? 'bg-blush-500 border-blush-500 text-white'
+              : 'bg-cream border-blush-300 text-transparent'
+          }`;
+          box.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i>';
+
+          const labelWrap = document.createElement('span');
+          labelWrap.className = 'min-w-0';
+
+          const nameSpan = document.createElement('span');
+          nameSpan.className = `block text-sm font-bold ${
+            isChecked ? 'text-blush-700' : 'text-stone-700'
+          }`;
+          nameSpan.textContent = prayer.name;
+
+          const subSpan = document.createElement('span');
+          subSpan.className = 'block text-[11px] font-medium text-rosegold-500';
+          subSpan.textContent = isChecked && itemState.validatedAt
+            ? `${prayer.hint} · Validée à ${itemState.validatedAt}`
+            : prayer.hint;
+
+          labelWrap.appendChild(nameSpan);
+          labelWrap.appendChild(subSpan);
+          toggleBtn.appendChild(box);
+          toggleBtn.appendChild(labelWrap);
+          toggleBtn.addEventListener('click', () => togglePrayerValidation(prayer.id));
+
+          const statusTag = document.createElement('span');
+          statusTag.className = `px-2.5 py-1 rounded-full text-[11px] font-semibold shrink-0 ${
+            isChecked
+              ? 'bg-blush-500 text-white'
+              : 'bg-cream text-stone-400 border border-blush-200'
+          }`;
+          statusTag.textContent = isChecked ? 'Validée' : 'À valider';
+
+          topRow.appendChild(toggleBtn);
+          topRow.appendChild(statusTag);
+
+          const noteInput = document.createElement('input');
+          noteInput.type = 'text';
+          noteInput.value = itemState.note || '';
+          noteInput.placeholder = `Note ou heure pour ${prayer.name} (optionnel)...`;
+          noteInput.setAttribute('aria-label', `Note pour la prière ${prayer.name}`);
+          noteInput.className =
+            'mt-2 w-full bg-cream/80 focus:bg-cream border border-blush-200/70 focus:border-blush-400 rounded-xl px-3 py-1.5 text-xs text-stone-600 placeholder:text-stone-400 focus:outline-none transition-all';
+          noteInput.addEventListener('input', (e) => {
+            state.prayers[prayer.id] = {
+              ...state.prayers[prayer.id],
+              note: e.target.value,
+            };
+            saveState();
+          });
+
+          li.appendChild(topRow);
+          li.appendChild(noteInput);
+          els.prayersList.appendChild(li);
+        });
+
+        lucide.createIcons();
+      }
+
+      /**
+       * Met à jour l'affichage du verset du Coran suggéré.
+       */
+      function renderQuranVerseSuggestion() {
+        const idx = Math.abs(state.quranVerseIndex || 0) % QURAN_VERSES.length;
+        const verse = QURAN_VERSES[idx];
+        if (els.quranVerseRef) {
+          els.quranVerseRef.textContent = verse.ref;
+        }
+        if (els.quranVerseText) {
+          els.quranVerseText.textContent = verse.text;
+        }
+      }
+
+      /**
+       * Ajoute ou cible la tâche dédiée à la lecture d'un verset du Coran.
+       */
+      function addOrFocusQuranTask(customLabel = '') {
+        const defaultTitle = 'Lire un verset du Coran';
+        const targetTitle = customLabel ? `Lire un verset du Coran — ${customLabel}` : defaultTitle;
+
+        const existingOpen = state.tasks.find(
+          (t) => !t.done && (t.title === defaultTitle || t.title.startsWith('Lire un verset du Coran'))
+        );
+
+        if (existingOpen && !customLabel) {
+          state.activeTaskId = existingOpen.id;
+          saveState();
+          renderTasks();
+          showToast('Tâche « Lire un verset du Coran » ciblée dans votre carnet.');
+          return;
+        }
+
+        addTask(targetTitle, 1);
+      }
+
+      /**
+       * Rend la liste des tâches d'étude.
+       */
+      function renderTasks() {
+        els.taskList.innerHTML = '';
+
+        if (!state.tasks.length) {
+          els.emptyTasksState.classList.remove('hidden');
+          renderStats();
+          return;
+        }
+
+        els.emptyTasksState.classList.add('hidden');
+
+        state.tasks.forEach((task) => {
+          const isSelected = state.activeTaskId === task.id && !task.done;
+          const li = document.createElement('li');
+          li.className = `group flex items-center justify-between gap-3 p-3.5 rounded-2xl border transition-all duration-200 ${
+            isSelected
+              ? 'bg-blush-100/90 border-blush-400 shadow-sm'
+              : task.done
+              ? 'bg-blush-50/40 border-blush-100 opacity-75'
+              : 'bg-blush-50/70 hover:bg-blush-100/60 border-blush-200/80'
+          }`;
+
+          // Partie gauche : case à cocher + titre + badge de sessions
+          const leftDiv = document.createElement('div');
+          leftDiv.className = 'flex items-center gap-3 min-w-0 flex-1';
+
+          const checkbox = document.createElement('button');
+          checkbox.type = 'button';
+          checkbox.setAttribute('aria-label', task.done ? 'Marquer comme non terminée' : 'Marquer comme terminée');
+          checkbox.className = `w-5 h-5 rounded-lg border flex items-center justify-center shrink-0 transition-all ${
+            task.done
+              ? 'bg-blush-500 border-blush-500 text-white'
+              : 'bg-cream border-blush-300 hover:border-blush-500 text-transparent'
+          }`;
+          checkbox.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i>';
+          checkbox.addEventListener('click', () => toggleTaskDone(task.id));
+
+          const textWrapper = document.createElement('div');
+          textWrapper.className = 'min-w-0 flex-1';
+
+          const titleEl = document.createElement('p');
+          titleEl.className = `text-sm font-semibold truncate ${
+            task.done ? 'line-through text-stone-400' : 'text-stone-700'
+          }`;
+          titleEl.textContent = task.title;
+
+          const metaEl = document.createElement('p');
+          metaEl.className = 'text-[11px] font-medium text-rosegold-500 mt-0.5';
+          metaEl.textContent = `Sessions : ${task.completedCount || 0} / ${task.estimated || 1}`;
+
+          textWrapper.appendChild(titleEl);
+          textWrapper.appendChild(metaEl);
+
+          leftDiv.appendChild(checkbox);
+          leftDiv.appendChild(textWrapper);
+
+          // Partie droite : bouton cibler pour le minuteur + bouton supprimer
+          const actionsDiv = document.createElement('div');
+          actionsDiv.className = 'flex items-center gap-1.5 shrink-0';
+
+          if (!task.done) {
+            const focusBtn = document.createElement('button');
+            focusBtn.type = 'button';
+            focusBtn.title = isSelected ? 'Objectif actif pour le minuteur' : 'Cibler cet objectif';
+            focusBtn.className = `px-2.5 py-1 rounded-xl text-xs font-semibold transition-all flex items-center gap-1 ${
+              isSelected
+                ? 'bg-blush-500 text-white'
+                : 'bg-cream hover:bg-blush-200/70 text-stone-600 border border-blush-200'
+            }`;
+            focusBtn.innerHTML = `<i data-lucide="target" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">${isSelected ? 'Actif' : 'Cibler'}</span>`;
+            focusBtn.addEventListener('click', () => selectActiveTask(task.id));
+            actionsDiv.appendChild(focusBtn);
+          }
+
+          const deleteBtn = document.createElement('button');
+          deleteBtn.type = 'button';
+          deleteBtn.title = 'Supprimer cet objectif';
+          deleteBtn.setAttribute('aria-label', 'Supprimer cet objectif');
+          deleteBtn.className = 'p-1.5 rounded-xl text-stone-400 hover:text-blush-600 hover:bg-blush-100 transition-all';
+          deleteBtn.innerHTML = '<i data-lucide="trash-2" class="w-4 h-4"></i>';
+          deleteBtn.addEventListener('click', () => deleteTask(task.id));
+          actionsDiv.appendChild(deleteBtn);
+
+          li.appendChild(leftDiv);
+          li.appendChild(actionsDiv);
+          els.taskList.appendChild(li);
+        });
+
+        renderStats();
+        renderTimer();
+      }
+
+      /**
+       * Ajoute une nouvelle tâche à la liste.
+       */
+      function addTask(title, estimated) {
+        const cleanTitle = String(title || '').trim();
+        if (!cleanTitle) return;
+
+        const estCount = Math.max(1, Math.min(12, parseInt(estimated, 10) || 1));
+        const newTask = {
+          id: `task-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+          title: cleanTitle,
+          estimated: estCount,
+          completedCount: 0,
+          done: false,
+        };
+
+        state.tasks.unshift(newTask);
+        if (!state.activeTaskId) {
+          state.activeTaskId = newTask.id;
+        }
+        saveState();
+        renderTasks();
+        showToast('Nouvel objectif ajouté à votre carnet.');
+      }
+
+      /**
+       * Bascule l'état terminé d'une tâche.
+       */
+      function toggleTaskDone(taskId) {
+        const task = state.tasks.find((t) => t.id === taskId);
+        if (!task) return;
+        task.done = !task.done;
+        if (task.done && state.activeTaskId === task.id) {
+          state.activeTaskId = null;
+        }
+        saveState();
+        renderTasks();
+      }
+
+      /**
+       * Sélectionne ou désélectionne une tâche active pour le minuteur.
+       */
+      function selectActiveTask(taskId) {
+        state.activeTaskId = state.activeTaskId === taskId ? null : taskId;
+        saveState();
+        renderTasks();
+        if (state.activeTaskId) {
+          showToast('Objectif ciblé pour votre session d’étude.');
+        }
+      }
+
+      /**
+       * Supprime une tâche.
+       */
+      function deleteTask(taskId) {
+        state.tasks = state.tasks.filter((t) => t.id !== taskId);
+        if (state.activeTaskId === taskId) {
+          state.activeTaskId = null;
+        }
+        saveState();
+        renderTasks();
+      }
+
+      /**
+       * Supprime toutes les tâches marquées comme terminées.
+       */
+      function clearCompletedTasks() {
+        const beforeCount = state.tasks.length;
+        state.tasks = state.tasks.filter((t) => !t.done);
+        if (state.tasks.length === beforeCount) {
+          showToast('Aucune tâche terminée à nettoyer.');
+          return;
+        }
+        saveState();
+        renderTasks();
+        showToast('Tâches terminées retirées.');
+      }
+
+      /**
+       * Met à jour le compteur de mots/caractères des notes de session.
+       */
+      function updateNotesMeta() {
+        const text = els.notesTextarea.value || '';
+        const chars = text.length;
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        els.notesWordCount.textContent = `${words} ${words > 1 ? 'mots' : 'mot'} · ${chars} ${chars > 1 ? 'caractères' : 'caractère'}`;
+      }
+
+      /**
+       * Initialise ou réveille l'AudioContext de manière sécurisée.
+       */
+      function ensureAudioContext() {
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return null;
+
+          if (!audioCtx) {
+            audioCtx = new AudioContextClass();
+            masterGain = audioCtx.createGain();
+            masterGain.gain.value = (state.volume / 100) * 0.35;
+            masterGain.connect(audioCtx.destination);
+          }
+
+          if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+          return audioCtx;
+        } catch (err) {
+          console.warn('Web Audio indisponible :', err);
+          return null;
+        }
+      }
+
+      /**
+       * Arrête tous les sons d'ambiance actifs.
+       */
+      function stopAmbientSound() {
+        ambientNodes.forEach((node) => {
+          try {
+            if (typeof node.stop === 'function') node.stop();
+            if (typeof node.disconnect === 'function') node.disconnect();
+          } catch (_) {
+            // Ignorer les nœuds déjà arrêtés
+          }
+        });
+        ambientNodes = [];
+
+        if (chimeInterval) {
+          clearInterval(chimeInterval);
+          chimeInterval = null;
+        }
+      }
+
+      /**
+       * Démarre l'ambiance sonore sélectionnée ('none', 'rain', 'breeze', 'chimes').
+       */
+      function applyAmbientSound(soundType) {
+        stopAmbientSound();
+        state.sound = soundType;
+
+        // Mise à jour visuelle des boutons
+        els.soundBtns.forEach((btn) => {
+          const active = btn.dataset.sound === soundType;
+          btn.className = active
+            ? 'sound-btn p-2.5 rounded-2xl border border-blush-500 bg-blush-500 text-white text-xs font-semibold flex flex-col items-center gap-1.5 transition-all shadow-sm'
+            : 'sound-btn p-2.5 rounded-2xl border border-blush-200 bg-blush-50 hover:bg-blush-100 text-stone-700 text-xs font-semibold flex flex-col items-center gap-1.5 transition-all';
+        });
+
+        saveState();
+
+        if (soundType === 'none') return;
+
+        const ctx = ensureAudioContext();
+        if (!ctx || !masterGain) {
+          showToast('Ambiance activée (audio limité sur cet appareil).');
+          return;
+        }
+
+        if (soundType === 'rain' || soundType === 'breeze') {
+          // Génération d'un buffer de bruit doux (2 secondes en boucle)
+          const bufferSize = ctx.sampleRate * 2;
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          let lastOut = 0.0;
+
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            if (soundType === 'rain') {
+              // Bruit rose léger pour évoquer une pluie fine
+              lastOut = (lastOut + 0.04 * white) / 1.04;
+              data[i] = lastOut * 2.4;
+            } else {
+              // Brise chaude filtrée très douce
+              lastOut = (lastOut + 0.015 * white) / 1.015;
+              data[i] = lastOut * 2.8;
+            }
+          }
+
+          const noise = ctx.createBufferSource();
+          noise.buffer = buffer;
+          noise.loop = true;
+
+          const filter = ctx.createBiquadFilter();
+          filter.type = soundType === 'rain' ? 'bandpass' : 'lowpass';
+          filter.frequency.value = soundType === 'rain' ? 900 : 340;
+          filter.Q.value = soundType === 'rain' ? 0.6 : 0.4;
+
+          const localGain = ctx.createGain();
+          localGain.gain.value = 0.45;
+
+          noise.connect(filter);
+          filter.connect(localGain);
+          localGain.connect(masterGain);
+          noise.start();
+
+          ambientNodes.push(noise, filter, localGain);
+        } else if (soundType === 'chimes') {
+          // Notes douces de gamme pentatonique jouées lentement
+          const notes = [523.25, 587.33, 659.25, 783.99, 880.0];
+          const triggerSoftTone = () => {
+            if (!audioCtx || !masterGain || state.sound !== 'chimes') return;
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.value = notes[Math.floor(Math.random() * notes.length)];
+
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.exponentialRampToValueAtTime(0.18, now + 0.35);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.8);
+
+            osc.connect(gain);
+            gain.connect(masterGain);
+
+            osc.start(now);
+            osc.stop(now + 2.9);
+          };
+
+          triggerSoftTone();
+          chimeInterval = setInterval(triggerSoftTone, 3600);
+        }
+      }
+
+      /**
+       * Joue un carillon doux à la fin d'une session.
+       */
+      function playGentleChime() {
+        const ctx = ensureAudioContext();
+        if (!ctx) return;
+
+        const freqs = [587.33, 880.0];
+        freqs.forEach((freq, idx) => {
+          const now = ctx.currentTime + idx * 0.22;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now);
+
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.14, now + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.4);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 1.45);
+        });
+      }
+
+      /**
+       * Attache tous les écouteurs d'événements interactifs.
+       */
+      function bindEvents() {
+        // Intention du jour
+        els.dailyIntentionInput.addEventListener('input', (e) => {
+          state.intention = e.target.value;
+          saveState();
+        });
+
+        // Réinitialisation de la journée
+        els.resetDayBtn.addEventListener('click', () => {
+          stopInterval();
+          state.isRunning = false;
+          state.completedSessions = 0;
+          state.intention = '';
+          state.mode = 'focus';
+          state.remainingSeconds = (state.durations.focus || 25) * 60;
+          state.prayers = createDefaultPrayers();
+          els.dailyIntentionInput.value = '';
+          saveState();
+          renderPrayers();
+          renderStats();
+          renderTimer();
+          showToast('Nouvelle journée commencée avec douceur 🦢');
+        });
+
+        // Réinitialisation des prières quotidiennes
+        if (els.resetPrayersBtn) {
+          els.resetPrayersBtn.addEventListener('click', resetPrayers);
+        }
+
+        // Bouton rapide pour ajouter / cibler la tâche de lecture d'un verset du Coran
+        if (els.addQuranTaskBtn) {
+          els.addQuranTaskBtn.addEventListener('click', () => addOrFocusQuranTask(''));
+        }
+
+        // Rotation du verset suggéré
+        if (els.nextQuranVerseBtn) {
+          els.nextQuranVerseBtn.addEventListener('click', () => {
+            state.quranVerseIndex = ((state.quranVerseIndex || 0) + 1) % QURAN_VERSES.length;
+            saveState();
+            renderQuranVerseSuggestion();
+          });
+        }
+
+        // Ajout du verset courant dans les objectifs
+        if (els.useQuranVerseBtn) {
+          els.useQuranVerseBtn.addEventListener('click', () => {
+            const verse = QURAN_VERSES[(state.quranVerseIndex || 0) % QURAN_VERSES.length];
+            addOrFocusQuranTask(verse.ref);
+          });
+        }
+
+        // Boutons de mode
+        els.modeBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            setMode(btn.dataset.mode, false);
+          });
+        });
+
+        // Bouton principal Commencer / Pause
+        els.startPauseBtn.addEventListener('click', () => {
+          ensureAudioContext();
+          if (state.isRunning) {
+            state.isRunning = false;
+            stopInterval();
+            saveState();
+            renderTimer();
+          } else {
+            if (state.remainingSeconds <= 0) {
+              state.remainingSeconds = (state.durations[state.mode] || 25) * 60;
+            }
+            state.isRunning = true;
+            startInterval();
+            saveState();
+            renderTimer();
+          }
+        });
+
+        // Réinitialiser le minuteur courant
+        els.resetTimerBtn.addEventListener('click', () => {
+          stopInterval();
+          state.isRunning = false;
+          state.remainingSeconds = (state.durations[state.mode] || 25) * 60;
+          saveState();
+          renderTimer();
+          showToast('Minuteur réinitialisé.');
+        });
+
+        // Passer à la session suivante
+        els.skipSessionBtn.addEventListener('click', () => {
+          handleTimerComplete(true);
+        });
+
+        // Durées personnalisées
+        const handleDurationChange = () => {
+          const focusVal = Math.max(1, Math.min(120, parseInt(els.focusMinutesInput.value, 10) || 25));
+          const shortVal = Math.max(1, Math.min(60, parseInt(els.shortBreakInput.value, 10) || 5));
+          const longVal = Math.max(1, Math.min(90, parseInt(els.longBreakInput.value, 10) || 15));
+
+          els.focusMinutesInput.value = String(focusVal);
+          els.shortBreakInput.value = String(shortVal);
+          els.longBreakInput.value = String(longVal);
+
+          state.durations = {
+            focus: focusVal,
+            shortBreak: shortVal,
+            longBreak: longVal,
+          };
+
+          if (!state.isRunning) {
+            state.remainingSeconds = state.durations[state.mode] * 60;
+          }
+
+          saveState();
+          renderTimer();
+        };
+
+        els.focusMinutesInput.addEventListener('change', handleDurationChange);
+        els.shortBreakInput.addEventListener('change', handleDurationChange);
+        els.longBreakInput.addEventListener('change', handleDurationChange);
+
+        // Sélecteur d'ambiance sonore
+        els.soundBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            applyAmbientSound(btn.dataset.sound);
+          });
+        });
+
+        // Contrôle du volume
+        els.volumeSlider.addEventListener('input', (e) => {
+          const vol = Math.max(0, Math.min(100, parseInt(e.target.value, 10) || 0));
+          state.volume = vol;
+          els.volumeValue.textContent = `${vol}%`;
+          if (masterGain && audioCtx) {
+            masterGain.gain.setTargetAtTime((vol / 100) * 0.35, audioCtx.currentTime, 0.05);
+          }
+          saveState();
+        });
+
+        // Activation du carillon de fin
+        els.chimeEnabledToggle.addEventListener('change', (e) => {
+          state.chimeEnabled = Boolean(e.target.checked);
+          saveState();
+          showToast(state.chimeEnabled ? 'Carillon de fin activé.' : 'Carillon de fin désactivé.');
+        });
+
+        // Ajout d'une tâche
+        els.addTaskForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          addTask(els.taskTitleInput.value, els.taskEstInput.value);
+          els.taskTitleInput.value = '';
+          els.taskEstInput.value = '1';
+          els.taskTitleInput.focus();
+        });
+
+        // Nettoyage des tâches terminées
+        els.clearCompletedBtn.addEventListener('click', clearCompletedTasks);
+
+        // Notes de session
+        els.notesTextarea.addEventListener('input', () => {
+          state.notes = els.notesTextarea.value;
+          updateNotesMeta();
+          saveState();
+          els.notesSaveStatus.textContent = 'Enregistré automatiquement';
+        });
+
+        // Copier les notes dans le presse-papiers
+        els.copyNotesBtn.addEventListener('click', () => {
+          const content = els.notesTextarea.value || '';
+          if (!content.trim()) {
+            showToast('Aucune note à copier pour le moment.');
+            return;
+          }
+
+          els.notesTextarea.select();
+          try {
+            const copied = document.execCommand('copy');
+            if (copied) {
+              showToast('Notes copiées dans le presse-papiers !');
+            } else {
+              showToast('Sélectionnez le texte pour le copier.');
+            }
+          } catch (_) {
+            showToast('Sélectionnez le texte pour le copier.');
+          }
+        });
+      }
+
+      /**
+       * Initialise l'interface à partir de l'état chargé.
+       */
+      function init() {
+        els.dateDisplay.textContent = formatFrenchDate();
+        els.dailyIntentionInput.value = state.intention || '';
+        els.focusMinutesInput.value = String(state.durations.focus);
+        els.shortBreakInput.value = String(state.durations.shortBreak);
+        els.longBreakInput.value = String(state.durations.longBreak);
+        els.volumeSlider.value = String(state.volume);
+        els.volumeValue.textContent = `${state.volume}%`;
+        els.chimeEnabledToggle.checked = Boolean(state.chimeEnabled);
+        els.notesTextarea.value = state.notes || '';
+
+        updateNotesMeta();
+        renderPrayers();
+        renderQuranVerseSuggestion();
+        renderStats();
+        renderTasks();
+        renderTimer();
+        bindEvents();
+
+        // Appliquer l'état visuel du son sélectionné (sans forcer l'audio avant interaction utilisateur)
+        els.soundBtns.forEach((btn) => {
+          const active = btn.dataset.sound === state.sound;
+          btn.className = active
+            ? 'sound-btn p-2.5 rounded-2xl border border-blush-500 bg-blush-500 text-white text-xs font-semibold flex flex-col items-center gap-1.5 transition-all shadow-sm'
+            : 'sound-btn p-2.5 rounded-2xl border border-blush-200 bg-blush-50 hover:bg-blush-100 text-stone-700 text-xs font-semibold flex flex-col items-center gap-1.5 transition-all';
+        });
+
+        lucide.createIcons();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
